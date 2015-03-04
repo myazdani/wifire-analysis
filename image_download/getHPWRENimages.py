@@ -7,7 +7,7 @@ import urllib
 import re
 import os
 
-outpath = "../output"
+outpath = "../../output"
 
 f = open("dates.txt", 'ru')
 dates = [line.rstrip() for line in  f]

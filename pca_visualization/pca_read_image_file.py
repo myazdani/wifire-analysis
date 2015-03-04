@@ -8,8 +8,8 @@ import pca
 from scipy.cluster.vq import *
 
 
-featuresFilename = "../processedData/features/output_HUE_ZONES_3__JUL_1_SD.csv"
-outfile = "../figures/pca_H_PC-1-2Jul_1.jpg"
+featuresFilename = "../../processedData/features/output_HUE_ZONES_3__JUL_3_SD.csv"
+outfile = "../../figures/pca_H_PC-1-2Jul_3_2k.jpg"
 
 with open(featuresFilename, 'rU') as f:
   reader = csv.reader(f)
@@ -29,7 +29,7 @@ feature_matrix = array(feature_matrix)
 V,S,immean = pca.pca(feature_matrix)
 projected_features = array([dot(V[[0,1]],feature_matrix[i]-immean) for i in range(len(image_paths))])
 
-h,w = 20000,20000
+h,w = 2000,2000
 img = Image.new('RGB',(w,h),(255,255,255))
 draw = ImageDraw.Draw(img)
 
@@ -38,7 +38,7 @@ scaled = floor(array([ (p / scale) * (w/2-20,h/2-20) + (w/2,h/2) for p in projec
 print "number of images", len(image_paths)
 for i in range(len(image_paths)):
   nodeim = Image.open(image_paths[i]) 
-  nodeim = nodeim.resize((275,275))
+  nodeim = nodeim.resize((95,95))
   ns = nodeim.size 
   img.paste(nodeim,(int(scaled[i][0]-ns[0]//2),int(scaled[i][1]-ns[1]//2),int(scaled[i][0]+ns[0]//2+1),int(scaled[i][1]+ns[1]//2+1))) 
 
